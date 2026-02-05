@@ -13,14 +13,7 @@ A React, Vue, and Angular hook/composable/service for managing toast notificatio
 ## Installation
 
 ```bash
-# React
-npm install @myhooks/useToast/react
-
-# Vue
-npm install @myhooks/useToast/vue
-
-# Angular
-npm install @myhooks/useToast/angular
+npm install tri-hooks
 ```
 
 ## Usage
@@ -29,22 +22,22 @@ npm install @myhooks/useToast/angular
 
 ```tsx
 import React from 'react';
-import { useToast } from '@myhooks/useToast/react';
+import { useToast } from 'tri-hooks/hooks/notifications/useToast/react';
 
 const MyComponent = () => {
   const { toasts, addToast, removeToast, clearToasts } = useToast('top-right');
 
   const showSuccessToast = () => {
-    addToast('Operation completed successfully!', { 
-      type: 'success', 
-      duration: 5000 
+    addToast('Operation completed successfully!', {
+      type: 'success',
+      duration: 5000,
     });
   };
 
   const showErrorToast = () => {
-    addToast('An error occurred!', { 
-      type: 'error', 
-      position: 'bottom-left' 
+    addToast('An error occurred!', {
+      type: 'error',
+      position: 'bottom-left',
     });
   };
 
@@ -53,11 +46,11 @@ const MyComponent = () => {
       <button onClick={showSuccessToast}>Show Success Toast</button>
       <button onClick={showErrorToast}>Show Error Toast</button>
       <button onClick={clearToasts}>Clear All Toasts</button>
-      
+
       <div className="toast-container">
         {toasts.map(toast => (
-          <div 
-            key={toast.id} 
+          <div
+            key={toast.id}
             className={`toast toast-${toast.type}`}
             onClick={() => removeToast(toast.id)}
           >
@@ -80,11 +73,11 @@ export default MyComponent;
     <button @click="showSuccessToast">Show Success Toast</button>
     <button @click="showErrorToast">Show Error Toast</button>
     <button @click="clearToasts">Clear All Toasts</button>
-    
+
     <div class="toast-container">
-      <div 
-        v-for="toast in toasts" 
-        :key="toast.id" 
+      <div
+        v-for="toast in toasts"
+        :key="toast.id"
         :class="`toast toast-${toast.type}`"
         @click="removeToast(toast.id)"
       >
@@ -95,21 +88,21 @@ export default MyComponent;
 </template>
 
 <script setup lang="ts">
-import { useToast } from '@myhooks/useToast/vue';
+import { useToast } from 'tri-hooks/hooks/notifications/useToast/vue';
 
 const { toasts, addToast, removeToast, clearToasts } = useToast('top-right');
 
 const showSuccessToast = () => {
-  addToast('Operation completed successfully!', { 
-    type: 'success', 
-    duration: 5000 
+  addToast('Operation completed successfully!', {
+    type: 'success',
+    duration: 5000,
   });
 };
 
 const showErrorToast = () => {
-  addToast('An error occurred!', { 
-    type: 'error', 
-    position: 'bottom-left' 
+  addToast('An error occurred!', {
+    type: 'error',
+    position: 'bottom-left',
   });
 };
 </script>
@@ -119,7 +112,7 @@ const showErrorToast = () => {
 
 ```typescript
 import { Component } from '@angular/core';
-import { useToast } from '@myhooks/useToast/angular';
+import { useToast } from 'tri-hooks/hooks/notifications/useToast/angular';
 
 @Component({
   selector: 'app-my-component',
@@ -128,9 +121,9 @@ import { useToast } from '@myhooks/useToast/angular';
       <button (click)="showSuccessToast()">Show Success Toast</button>
       <button (click)="showErrorToast()">Show Error Toast</button>
       <button (click)="clearToasts()">Clear All Toasts</button>
-      
+
       <div class="toast-container">
-        <div 
+        <div
           *ngFor="let toast of hook.toasts"
           [class]="'toast toast-' + toast.type"
           (click)="hook.removeToast(toast.id)"
@@ -139,22 +132,22 @@ import { useToast } from '@myhooks/useToast/angular';
         </div>
       </div>
     </div>
-  `
+  `,
 })
 export class MyComponent {
   hook = useToast('top-right');
 
   showSuccessToast() {
-    this.hook.addToast('Operation completed successfully!', { 
-      type: 'success', 
-      duration: 5000 
+    this.hook.addToast('Operation completed successfully!', {
+      type: 'success',
+      duration: 5000,
     });
   }
 
   showErrorToast() {
-    this.hook.addToast('An error occurred!', { 
-      type: 'error', 
-      position: 'bottom-left' 
+    this.hook.addToast('An error occurred!', {
+      type: 'error',
+      position: 'bottom-left',
     });
   }
 

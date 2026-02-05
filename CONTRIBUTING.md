@@ -1,6 +1,6 @@
-# Contributing to @tri-hooks/library
+# Contributing to tri-hooks
 
-Thank you for your interest in contributing to @tri-hooks/library! We're excited to work with the community to build a comprehensive, tree-shakable hooks library for React, Vue, and Angular.
+Thank you for your interest in contributing to tri-hooks! We're excited to work with the community to build a comprehensive, tree-shakable hooks library for React, Vue, and Angular.
 
 ## 🚀 Getting Started
 

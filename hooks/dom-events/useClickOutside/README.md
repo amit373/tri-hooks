@@ -1,6 +1,19 @@
 # useClickOutside
 
-A hook for detecting clicks outside a specific element, commonly used for closing dropdowns, modals, and tooltips.
+A React, Vue, and Angular hook/composable that detects clicks outside a given element. Attach the returned ref to your node and run a callback when a click happens outside it—useful for closing dropdowns, modals, and tooltips.
+
+## Features
+
+- Single callback when click occurs outside the target element
+- Framework-specific ref/element return (React ref, Vue ref, Angular element)
+- Automatic listener cleanup on unmount
+- Same behavior across React, Vue, and Angular
+
+## Installation
+
+```bash
+npm install tri-hooks
+```
 
 ## Problem
 
@@ -49,7 +62,7 @@ const { element } = useClickOutside<T extends HTMLElement>(callback)
 
 ```tsx
 import { useRef } from 'react';
-import { useClickOutside } from './hooks/dom-events/useClickOutside/react';
+import { useClickOutside } from 'tri-hooks/hooks/dom-events/useClickOutside/react';
 
 function Dropdown() {
   const [isOpen, setIsOpen] = useState(false);
@@ -77,7 +90,7 @@ function Dropdown() {
 ```vue
 <script setup>
 import { ref } from 'vue';
-import { useClickOutside } from './hooks/dom-events/useClickOutside/vue';
+import { useClickOutside } from 'tri-hooks/hooks/dom-events/useClickOutside/vue';
 
 const isOpen = ref(false);
 const dropdownRef = useClickOutside(() => {
@@ -101,7 +114,7 @@ const dropdownRef = useClickOutside(() => {
 
 ```typescript
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
-import { useClickOutside } from './hooks/dom-events/useClickOutside/angular';
+import { useClickOutside } from 'tri-hooks/hooks/dom-events/useClickOutside/angular';
 
 @Component({
   selector: 'app-dropdown',

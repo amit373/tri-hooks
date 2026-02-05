@@ -1,6 +1,20 @@
 # useLockBodyScroll
 
-Lock or unlock body scroll (e.g. when a modal or drawer is open). Prevents background scrolling.
+A React, Vue, and Angular hook/composable that locks or unlocks body scroll. Use it when a modal or drawer is open so the background page does not scroll.
+
+## Features
+
+- Lock body overflow to prevent background scroll
+- Restore previous overflow on unlock or unmount
+- React: pass a boolean; Vue/Angular: pass a getter for reactive lock state
+- SSR-safe; no-op when `document` is unavailable
+- Identical behavior across React, Vue, and Angular
+
+## Installation
+
+```bash
+npm install tri-hooks
+```
 
 ## When to Use
 
@@ -31,7 +45,7 @@ useLockBodyScroll(lock: () => boolean): void
 ### React
 
 ```tsx
-import { useLockBodyScroll } from '@tri-hooks/library/hooks/browser-apis/useLockBodyScroll/react';
+import { useLockBodyScroll } from 'tri-hooks/hooks/browser-apis/useLockBodyScroll/react';
 
 function Modal({ open }: { open: boolean }) {
   useLockBodyScroll(open);
@@ -43,7 +57,7 @@ function Modal({ open }: { open: boolean }) {
 
 ```vue
 <script setup>
-import { useLockBodyScroll } from '@tri-hooks/library/hooks/browser-apis/useLockBodyScroll/vue';
+import { useLockBodyScroll } from 'tri-hooks/hooks/browser-apis/useLockBodyScroll/vue';
 
 const open = ref(false);
 useLockBodyScroll(() => open.value);
@@ -53,7 +67,7 @@ useLockBodyScroll(() => open.value);
 ### Angular
 
 ```typescript
-import { useLockBodyScroll } from '@tri-hooks/library/hooks/browser-apis/useLockBodyScroll/angular';
+import { useLockBodyScroll } from 'tri-hooks/hooks/browser-apis/useLockBodyScroll/angular';
 
 @Component({ ... })
 export class ModalComponent {

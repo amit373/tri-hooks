@@ -38,7 +38,7 @@ const { isIdle, reset } = useIdle(timeout?: number, options?: UseIdleOptions)
 ### React
 
 ```tsx
-import { useIdle } from '@tri-hooks/library/hooks/data-async/useIdle/react';
+import { useIdle } from 'tri-hooks/hooks/data-async/useIdle/react';
 
 function App() {
   const [isIdle, reset] = useIdle(30000);
@@ -55,7 +55,7 @@ function App() {
 
 ```vue
 <script setup>
-import { useIdle } from '@tri-hooks/library/hooks/data-async/useIdle/vue';
+import { useIdle } from 'tri-hooks/hooks/data-async/useIdle/vue';
 
 const { isIdle, reset } = useIdle(30000);
 </script>
@@ -69,7 +69,7 @@ const { isIdle, reset } = useIdle(30000);
 ### Angular
 
 ```typescript
-import { useIdle } from '@tri-hooks/library/hooks/data-async/useIdle/angular';
+import { useIdle } from 'tri-hooks/hooks/data-async/useIdle/angular';
 
 @Component({ ... })
 export class AppComponent {

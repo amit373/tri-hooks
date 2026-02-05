@@ -43,7 +43,7 @@ const { isHovered, setElement } = useHover<T>(elementRef?);
 ### React
 
 ```tsx
-import { useHover } from '@tri-hooks/library/hooks/state-ui/useHover/react';
+import { useHover } from 'tri-hooks/hooks/state-ui/useHover/react';
 
 function Card() {
   const [ref, isHovered] = useHover<HTMLDivElement>();
@@ -59,7 +59,7 @@ function Card() {
 
 ```vue
 <script setup>
-import { useHover } from '@tri-hooks/library/hooks/state-ui/useHover/vue';
+import { useHover } from 'tri-hooks/hooks/state-ui/useHover/vue';
 
 const { ref: hoverRef, isHovered } = useHover();
 </script>
@@ -72,7 +72,7 @@ const { ref: hoverRef, isHovered } = useHover();
 ### Angular
 
 ```typescript
-import { useHover } from '@tri-hooks/library/hooks/state-ui/useHover/angular';
+import { useHover } from 'tri-hooks/hooks/state-ui/useHover/angular';
 import { ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 
 @Component({ ... })

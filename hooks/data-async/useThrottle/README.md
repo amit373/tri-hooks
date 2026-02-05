@@ -49,7 +49,7 @@ const throttledFunction = useThrottle(callback, delay?)
 
 ```tsx
 import { useState } from 'react';
-import { useThrottle } from './hooks/data-async/useThrottle/react';
+import { useThrottle } from 'tri-hooks/hooks/data-async/useThrottle/react';
 
 function ScrollTracker() {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -78,7 +78,7 @@ function ScrollTracker() {
 ```vue
 <script setup>
 import { ref } from 'vue';
-import { useThrottle } from './hooks/data-async/useThrottle/vue';
+import { useThrottle } from 'tri-hooks/hooks/data-async/useThrottle/vue';
 
 const scrollPosition = ref(0);
 
@@ -105,7 +105,7 @@ const throttledScrollHandler = useThrottle(handleScroll, 200);
 
 ```typescript
 import { Component, HostListener } from '@angular/core';
-import { useThrottle } from './hooks/data-async/useThrottle/angular';
+import { useThrottle } from 'tri-hooks/hooks/data-async/useThrottle/angular';
 
 @Component({
   selector: 'app-scroll-tracker',

@@ -43,7 +43,7 @@ useKeyPress(
 ### React
 
 ```tsx
-import { useKeyPress } from '@tri-hooks/library/hooks/dom-events/useKeyPress/react';
+import { useKeyPress } from 'tri-hooks/hooks/dom-events/useKeyPress/react';
 
 function Modal({ onClose }: { onClose: () => void }) {
   useKeyPress('Escape', onClose);
@@ -55,7 +55,7 @@ function Modal({ onClose }: { onClose: () => void }) {
 
 ```vue
 <script setup>
-import { useKeyPress } from '@tri-hooks/library/hooks/dom-events/useKeyPress/vue';
+import { useKeyPress } from 'tri-hooks/hooks/dom-events/useKeyPress/vue';
 
 const emit = defineEmits(['close']);
 useKeyPress(() => 'Escape', () => emit('close'));
@@ -65,7 +65,7 @@ useKeyPress(() => 'Escape', () => emit('close'));
 ### Angular
 
 ```typescript
-import { useKeyPress } from '@tri-hooks/library/hooks/dom-events/useKeyPress/angular';
+import { useKeyPress } from 'tri-hooks/hooks/dom-events/useKeyPress/angular';
 
 @Component({ ... })
 export class ModalComponent {

@@ -77,7 +77,7 @@ const {
 ### React
 
 ```tsx
-import { useNetwork } from './hooks/device-connectivity/useNetwork/react';
+import { useNetwork } from 'tri-hooks/hooks/device-connectivity/useNetwork/react';
 
 function NetworkStatus() {
   const { online, type, effectiveType, downlink } = useNetwork();
@@ -113,7 +113,7 @@ function App() {
 
 ```vue
 <script setup>
-import { useNetwork } from './hooks/device-connectivity/useNetwork/vue';
+import { useNetwork } from 'tri-hooks/hooks/device-connectivity/useNetwork/vue';
 
 const { online, type, effectiveType, downlink } = useNetwork();
 </script>
@@ -136,7 +136,7 @@ const { online, type, effectiveType, downlink } = useNetwork();
 
 ```typescript
 import { Component } from '@angular/core';
-import { useNetwork } from './hooks/device-connectivity/useNetwork/angular';
+import { useNetwork } from 'tri-hooks/hooks/device-connectivity/useNetwork/angular';
 
 @Component({
   selector: 'app-network-status',

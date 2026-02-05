@@ -14,13 +14,8 @@ A React, Vue, and Angular hook/composable/service for tracking window size in re
 
 ```bash
 # React
-npm install @myhooks/useWindowSize/react
+npm install tri-hooks
 
-# Vue
-npm install @myhooks/useWindowSize/vue
-
-# Angular
-npm install @myhooks/useWindowSize/angular
 ```
 
 ## Usage
@@ -29,14 +24,16 @@ npm install @myhooks/useWindowSize/angular
 
 ```tsx
 import React from 'react';
-import { useWindowSize } from '@myhooks/useWindowSize/react';
+import { useWindowSize } from 'tri-hooks/hooks/device-connectivity/useWindowSize/react';
 
 const MyComponent = () => {
   const { width, height } = useWindowSize();
 
   return (
     <div>
-      <p>Window size: {width} x {height}</p>
+      <p>
+        Window size: {width} x {height}
+      </p>
     </div>
   );
 };
@@ -54,7 +51,7 @@ export default MyComponent;
 </template>
 
 <script setup lang="ts">
-import { useWindowSize } from '@myhooks/useWindowSize/vue';
+import { useWindowSize } from 'tri-hooks/hooks/device-connectivity/useWindowSize/vue';
 
 const { width, height } = useWindowSize();
 </script>
@@ -64,7 +61,7 @@ const { width, height } = useWindowSize();
 
 ```typescript
 import { Component } from '@angular/core';
-import { useWindowSize } from '@myhooks/useWindowSize/angular';
+import { useWindowSize } from 'tri-hooks/hooks/device-connectivity/useWindowSize/angular';
 
 @Component({
   selector: 'app-my-component',
@@ -72,7 +69,7 @@ import { useWindowSize } from '@myhooks/useWindowSize/angular';
     <div>
       <p>Window size: {{ size.width }} x {{ size.height }}</p>
     </div>
-  `
+  `,
 })
 export class MyComponent {
   size = useWindowSize();

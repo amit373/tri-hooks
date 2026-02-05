@@ -49,7 +49,7 @@ const { value, toggle, setValue } = useToggle(initialValue?: boolean)
 ### React
 
 ```tsx
-import { useToggle } from './hooks/state-ui/useToggle/react';
+import { useToggle } from 'tri-hooks/hooks/state-ui/useToggle/react';
 
 function Modal() {
   const [isOpen, toggleOpen, setIsOpen] = useToggle(false);
@@ -75,7 +75,7 @@ function Modal() {
 
 ```vue
 <script setup>
-import { useToggle } from './hooks/state-ui/useToggle/vue';
+import { useToggle } from 'tri-hooks/hooks/state-ui/useToggle/vue';
 
 const { value: isDarkMode, toggle } = useToggle(false);
 </script>
@@ -92,7 +92,7 @@ const { value: isDarkMode, toggle } = useToggle(false);
 
 ```typescript
 import { Component } from '@angular/core';
-import { useToggle } from './hooks/state-ui/useToggle/angular';
+import { useToggle } from 'tri-hooks/hooks/state-ui/useToggle/angular';
 
 @Component({
   selector: 'app-theme-toggle',

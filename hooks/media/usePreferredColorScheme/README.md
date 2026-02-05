@@ -39,7 +39,7 @@ const scheme = usePreferredColorScheme(): Signal<'light' | 'dark' | null>
 ### React
 
 ```tsx
-import { usePreferredColorScheme } from '@tri-hooks/library/hooks/media/usePreferredColorScheme/react';
+import { usePreferredColorScheme } from 'tri-hooks/hooks/media/usePreferredColorScheme/react';
 
 function ThemeProvider() {
   const scheme = usePreferredColorScheme();
@@ -54,7 +54,7 @@ function ThemeProvider() {
 
 ```vue
 <script setup>
-import { usePreferredColorScheme } from '@tri-hooks/library/hooks/media/usePreferredColorScheme/vue';
+import { usePreferredColorScheme } from 'tri-hooks/hooks/media/usePreferredColorScheme/vue';
 import { watch } from 'vue';
 
 const scheme = usePreferredColorScheme();
@@ -67,7 +67,7 @@ watch(scheme, (s) => {
 ### Angular
 
 ```typescript
-import { usePreferredColorScheme } from '@tri-hooks/library/hooks/media/usePreferredColorScheme/angular';
+import { usePreferredColorScheme } from 'tri-hooks/hooks/media/usePreferredColorScheme/angular';
 
 @Component({ ... })
 export class ThemeComponent {

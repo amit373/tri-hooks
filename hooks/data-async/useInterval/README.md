@@ -33,7 +33,7 @@ useInterval(callback: () => void, delay: () => number | null): void
 ### React
 
 ```tsx
-import { useInterval } from '@tri-hooks/library/hooks/data-async/useInterval/react';
+import { useInterval } from 'tri-hooks/hooks/data-async/useInterval/react';
 
 function Poller() {
   const [count, setCount] = useState(0);
@@ -46,7 +46,7 @@ function Poller() {
 
 ```vue
 <script setup>
-import { useInterval } from '@tri-hooks/library/hooks/data-async/useInterval/vue';
+import { useInterval } from 'tri-hooks/hooks/data-async/useInterval/vue';
 import { ref } from 'vue';
 
 const count = ref(0);
@@ -58,7 +58,7 @@ useInterval(() => count.value++, () => delay.value);
 ### Angular
 
 ```typescript
-import { useInterval } from '@tri-hooks/library/hooks/data-async/useInterval/angular';
+import { useInterval } from 'tri-hooks/hooks/data-async/useInterval/angular';
 
 @Component({ ... })
 export class PollerComponent {

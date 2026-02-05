@@ -43,7 +43,7 @@ const isOnline = useOnline();
 ### React
 
 ```tsx
-import { useOnline } from './hooks/device-connectivity/useOnline/react';
+import { useOnline } from 'tri-hooks/hooks/device-connectivity/useOnline/react';
 
 function StatusBar() {
   const isOnline = useOnline();
@@ -79,7 +79,7 @@ function App() {
 
 ```vue
 <script setup>
-import { useOnline } from './hooks/device-connectivity/useOnline/vue';
+import { useOnline } from 'tri-hooks/hooks/device-connectivity/useOnline/vue';
 
 const isOnline = useOnline();
 </script>
@@ -102,7 +102,7 @@ const isOnline = useOnline();
 
 ```typescript
 import { Component } from '@angular/core';
-import { useOnline } from './hooks/device-connectivity/useOnline/angular';
+import { useOnline } from 'tri-hooks/hooks/device-connectivity/useOnline/angular';
 
 @Component({
   selector: 'app-status-bar',

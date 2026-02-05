@@ -15,17 +15,18 @@ A comprehensive form management hook that provides state management, validation,
 ## Installation
 
 ```bash
-npm install your-hooks-library
+npm install tri-hooks
 ```
 
 ## Usage
 
 ### React
+
 ```tsx
-import { useForm } from 'your-hooks-library/react';
+import { useForm } from 'tri-hooks/react';
 
 function ContactForm() {
-  const validationSchema = (values) => {
+  const validationSchema = values => {
     const errors = {};
     if (!values.name) errors.name = 'Name is required';
     if (!values.email) errors.email = 'Email is required';
@@ -33,14 +34,15 @@ function ContactForm() {
     return errors;
   };
 
-  const { values, errors, handleChange, handleBlur, handleSubmit, isValid } = useForm(
-    { name: '', email: '', message: '' },
-    validationSchema,
-    async (formData) => {
-      // Handle form submission
-      console.log('Form submitted:', formData);
-    }
-  );
+  const { values, errors, handleChange, handleBlur, handleSubmit, isValid } =
+    useForm(
+      { name: '', email: '', message: '' },
+      validationSchema,
+      async formData => {
+        // Handle form submission
+        console.log('Form submitted:', formData);
+      }
+    );
 
   return (
     <form onSubmit={handleSubmit}>
@@ -52,7 +54,7 @@ function ContactForm() {
         placeholder="Name"
       />
       {errors.name && <div className="error">{errors.name}</div>}
-      
+
       <input
         name="email"
         value={values.email}
@@ -61,7 +63,7 @@ function ContactForm() {
         placeholder="Email"
       />
       {errors.email && <div className="error">{errors.email}</div>}
-      
+
       <textarea
         name="message"
         value={values.message}
@@ -70,7 +72,7 @@ function ContactForm() {
         placeholder="Message"
       />
       {errors.message && <div className="error">{errors.message}</div>}
-      
+
       <button type="submit" disabled={!isValid}>
         Submit
       </button>
@@ -80,11 +82,12 @@ function ContactForm() {
 ```
 
 ### Vue 3
+
 ```vue
 <script setup>
-import { useForm } from 'your-hooks-library/vue';
+import { useForm } from 'tri-hooks/vue';
 
-const validationSchema = (values) => {
+const validationSchema = values => {
   const errors = {};
   if (!values.name) errors.name = 'Name is required';
   if (!values.email) errors.email = 'Email is required';
@@ -92,14 +95,15 @@ const validationSchema = (values) => {
   return errors;
 };
 
-const { values, errors, handleChange, handleBlur, handleSubmit, isValid } = useForm(
-  { name: '', email: '', message: '' },
-  validationSchema,
-  async (formData) => {
-    // Handle form submission
-    console.log('Form submitted:', formData);
-  }
-);
+const { values, errors, handleChange, handleBlur, handleSubmit, isValid } =
+  useForm(
+    { name: '', email: '', message: '' },
+    validationSchema,
+    async formData => {
+      // Handle form submission
+      console.log('Form submitted:', formData);
+    }
+  );
 </script>
 
 <template>
@@ -112,7 +116,7 @@ const { values, errors, handleChange, handleBlur, handleSubmit, isValid } = useF
       placeholder="Name"
     />
     <div v-if="errors.value.name" class="error">{{ errors.value.name }}</div>
-    
+
     <input
       name="email"
       :value="values.value.email"
@@ -121,7 +125,7 @@ const { values, errors, handleChange, handleBlur, handleSubmit, isValid } = useF
       placeholder="Email"
     />
     <div v-if="errors.value.email" class="error">{{ errors.value.email }}</div>
-    
+
     <textarea
       name="message"
       :value="values.value.message"
@@ -129,19 +133,20 @@ const { values, errors, handleChange, handleBlur, handleSubmit, isValid } = useF
       @blur="handleBlur"
       placeholder="Message"
     />
-    <div v-if="errors.value.message" class="error">{{ errors.value.message }}</div>
-    
-    <button type="submit" :disabled="!isValid">
-      Submit
-    </button>
+    <div v-if="errors.value.message" class="error">
+      {{ errors.value.message }}
+    </div>
+
+    <button type="submit" :disabled="!isValid">Submit</button>
   </form>
 </template>
 ```
 
 ### Angular
+
 ```typescript
 import { Component } from '@angular/core';
-import { FormService } from 'your-hooks-library/angular';
+import { FormService } from 'tri-hooks/angular';
 
 @Component({
   template: `
@@ -156,7 +161,7 @@ import { FormService } from 'your-hooks-library/angular';
       <div *ngIf="formState.errors.name" class="error">
         {{ formState.errors.name }}
       </div>
-      
+
       <input
         name="email"
         [value]="formState.values.email"
@@ -167,7 +172,7 @@ import { FormService } from 'your-hooks-library/angular';
       <div *ngIf="formState.errors.email" class="error">
         {{ formState.errors.email }}
       </div>
-      
+
       <textarea
         name="message"
         [value]="formState.values.message"
@@ -178,31 +183,29 @@ import { FormService } from 'your-hooks-library/angular';
       <div *ngIf="formState.errors.message" class="error">
         {{ formState.errors.message }}
       </div>
-      
-      <button type="submit" [disabled]="!formState.isValid">
-        Submit
-      </button>
+
+      <button type="submit" [disabled]="!formState.isValid">Submit</button>
     </form>
-  `
+  `,
 })
 export class ContactFormComponent {
   private formService = new FormService();
-  
+
   formState = this.formService.useForm(
     { name: '', email: '', message: '' },
-    (values) => {
+    values => {
       const errors: any = {};
       if (!values.name) errors.name = 'Name is required';
       if (!values.email) errors.email = 'Email is required';
       if (!values.message) errors.message = 'Message is required';
       return errors;
     },
-    async (formData) => {
+    async formData => {
       // Handle form submission
       console.log('Form submitted:', formData);
     }
   );
-  
+
   handleChange = this.formState.handleChange;
   handleBlur = this.formState.handleBlur;
   handleSubmit = this.formState.handleSubmit;

@@ -1,6 +1,6 @@
 {
-  "name": "@tri-hooks/library",
-  "version": "1.0.0",
+  "name": "tri-hooks",
+  "version": "1.0.1",
   "description": "A comprehensive, tree-shakable hooks library for React, Vue, and Angular",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -624,6 +624,13 @@
   ],
   "author": "Tri Hooks Team",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tri-hooks/tri-hooks.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "@angular/core": "^17.0.0",
     "@babel/plugin-transform-modules-commonjs": "^7.28.6",

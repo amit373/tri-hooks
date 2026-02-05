@@ -29,7 +29,7 @@ const { copied, copy, error } = useClipboard();
 ### React
 
 ```tsx
-import { useClipboard } from '@tri-hooks/library/hooks/state-ui/useClipboard/react';
+import { useClipboard } from 'tri-hooks/hooks/state-ui/useClipboard/react';
 
 function CopyButton({ text }: { text: string }) {
   const { copied, copy, error } = useClipboard();
@@ -45,7 +45,7 @@ function CopyButton({ text }: { text: string }) {
 
 ```vue
 <script setup>
-import { useClipboard } from '@tri-hooks/library/hooks/state-ui/useClipboard/vue';
+import { useClipboard } from 'tri-hooks/hooks/state-ui/useClipboard/vue';
 
 const { copied, copy, error } = useClipboard();
 </script>
@@ -58,7 +58,7 @@ const { copied, copy, error } = useClipboard();
 ### Angular
 
 ```typescript
-import { useClipboard } from '@tri-hooks/library/hooks/state-ui/useClipboard/angular';
+import { useClipboard } from 'tri-hooks/hooks/state-ui/useClipboard/angular';
 
 @Component({ ... })
 export class CopyButtonComponent {

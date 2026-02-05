@@ -14,22 +14,23 @@ A React, Vue, and Angular hook/service that wraps the native MutationObserver AP
 ## Installation
 
 ```bash
-npm install your-hooks-library
+npm install tri-hooks
 ```
 
 ## Usage
 
 ### React
+
 ```tsx
 import { useEffect, useRef } from 'react';
-import { useMutationObserver } from 'your-hooks-library/react';
+import { useMutationObserver } from 'tri-hooks/react';
 
 function MyComponent() {
   const targetRef = useRef<HTMLDivElement>(null);
   const mutationsRef = useRef<MutationRecord[]>([]);
 
   const { observe, disconnect, isSupported } = useMutationObserver(
-    (mutations) => {
+    mutations => {
       mutationsRef.current = mutations;
       console.log('DOM mutations detected:', mutations);
     },
@@ -60,16 +61,17 @@ function MyComponent() {
 ```
 
 ### Vue 3
+
 ```vue
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
-import { useMutationObserver } from 'your-hooks-library/vue';
+import { useMutationObserver } from 'tri-hooks/vue';
 
 const targetEl = ref(null);
 const mutations = ref([]);
 
 const { observe, disconnect, isSupported } = useMutationObserver(
-  (mutationRecords) => {
+  mutationRecords => {
     mutations.value = mutationRecords;
     console.log('DOM mutations detected:', mutationRecords);
   },
@@ -97,9 +99,16 @@ onUnmounted(() => {
 ```
 
 ### Angular
+
 ```typescript
-import { Component, ElementRef, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { MutationObserverService } from 'your-hooks-library/angular';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
+import { MutationObserverService } from 'tri-hooks/angular';
 
 @Component({
   template: `
@@ -107,14 +116,12 @@ import { MutationObserverService } from 'your-hooks-library/angular';
       <p>Watch this container for changes</p>
       <!-- Content that might change dynamically -->
     </div>
-    <div *ngIf="!isSupported">
-      MutationObserver not supported
-    </div>
-  `
+    <div *ngIf="!isSupported">MutationObserver not supported</div>
+  `,
 })
 export class MyComponent implements OnInit, OnDestroy {
   @ViewChild('targetEl', { static: false }) targetEl!: ElementRef;
-  
+
   isSupported = false;
   private observeFn!: (target: Node) => void;
   private disconnectFn!: () => void;
@@ -123,12 +130,12 @@ export class MyComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const result = this.mutationObserverService.useMutationObserver(
-      (mutations) => {
+      mutations => {
         console.log('DOM mutations detected:', mutations);
       },
       { childList: true, subtree: true, attributes: true }
     );
-    
+
     this.isSupported = result.isSupported;
     this.observeFn = result.observe;
     this.disconnectFn = result.disconnect;

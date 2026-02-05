@@ -33,7 +33,7 @@ useTimeout(callback: () => void, delay: () => number | null): void
 ### React
 
 ```tsx
-import { useTimeout } from '@tri-hooks/library/hooks/data-async/useTimeout/react';
+import { useTimeout } from 'tri-hooks/hooks/data-async/useTimeout/react';
 
 function Message() {
   const [show, setShow] = useState(true);
@@ -46,7 +46,7 @@ function Message() {
 
 ```vue
 <script setup>
-import { useTimeout } from '@tri-hooks/library/hooks/data-async/useTimeout/vue';
+import { useTimeout } from 'tri-hooks/hooks/data-async/useTimeout/vue';
 import { ref } from 'vue';
 
 const show = ref(true);
@@ -57,7 +57,7 @@ useTimeout(() => (show.value = false), () => 3000);
 ### Angular
 
 ```typescript
-import { useTimeout } from '@tri-hooks/library/hooks/data-async/useTimeout/angular';
+import { useTimeout } from 'tri-hooks/hooks/data-async/useTimeout/angular';
 
 @Component({ ... })
 export class MessageComponent {

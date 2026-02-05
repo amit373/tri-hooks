@@ -1,6 +1,19 @@
 # useAnimationFrame
 
-A hook for managing animation frames with real-time FPS tracking and animation control capabilities.
+A React, Vue, and Angular hook/composable for driving animations with `requestAnimationFrame`, with frame count, FPS tracking, and start/stop/reset control.
+
+## Features
+
+- Frame counter and FPS (updated every second)
+- Start, stop, and reset the animation loop
+- Automatic cleanup on unmount
+- Identical API across React, Vue, and Angular
+
+## Installation
+
+```bash
+npm install tri-hooks
+```
 
 ## Problem
 
@@ -49,7 +62,7 @@ const { frame, fps, start, stop, reset } = useAnimationFrame();
 
 ```tsx
 import { useEffect } from 'react';
-import { useAnimationFrame } from './hooks/animation/useAnimationFrame/react';
+import { useAnimationFrame } from 'tri-hooks/hooks/animation/useAnimationFrame/react';
 
 function AnimatedCircle() {
   const { frame, fps, stop } = useAnimationFrame();
@@ -102,7 +115,7 @@ function GameLoop() {
 ```vue
 <script setup>
 import { watch } from 'vue';
-import { useAnimationFrame } from './hooks/animation/useAnimationFrame/vue';
+import { useAnimationFrame } from 'tri-hooks/hooks/animation/useAnimationFrame/vue';
 
 const { frame, fps, stop } = useAnimationFrame();
 
@@ -140,7 +153,7 @@ const scale = 1 + Math.sin(frame.value * 0.1) * 0.5; // Scale between 0.5 and 1.
 
 ```typescript
 import { Component } from '@angular/core';
-import { useAnimationFrame } from './hooks/animation/useAnimationFrame/angular';
+import { useAnimationFrame } from 'tri-hooks/hooks/animation/useAnimationFrame/angular';
 
 @Component({
   selector: 'app-animated-circle',

@@ -13,14 +13,7 @@ A React, Vue, and Angular hook/composable/service for accessing geolocation info
 ## Installation
 
 ```bash
-# React
-npm install @myhooks/useGeolocation/react
-
-# Vue
-npm install @myhooks/useGeolocation/vue
-
-# Angular
-npm install @myhooks/useGeolocation/angular
+npm install tri-hooks
 ```
 
 ## Usage
@@ -29,7 +22,7 @@ npm install @myhooks/useGeolocation/angular
 
 ```tsx
 import React from 'react';
-import { useGeolocation } from '@myhooks/useGeolocation/react';
+import { useGeolocation } from 'tri-hooks/hooks/device-connectivity/useGeolocation/react';
 
 const MyComponent = () => {
   const {
@@ -38,7 +31,7 @@ const MyComponent = () => {
     isSupported,
     getCurrentPosition,
     watchPosition,
-    clearWatch
+    clearWatch,
   } = useGeolocation({ enableHighAccuracy: true });
 
   if (!isSupported) {
@@ -92,7 +85,7 @@ export default MyComponent;
 </template>
 
 <script setup lang="ts">
-import { useGeolocation } from '@myhooks/useGeolocation/vue';
+import { useGeolocation } from 'tri-hooks/hooks/device-connectivity/useGeolocation/vue';
 
 const {
   position,
@@ -100,7 +93,7 @@ const {
   isSupported,
   getCurrentPosition,
   watchPosition,
-  clearWatch
+  clearWatch,
 } = useGeolocation({ enableHighAccuracy: true });
 </script>
 ```
@@ -109,13 +102,15 @@ const {
 
 ```typescript
 import { Component } from '@angular/core';
-import { useGeolocation } from '@myhooks/useGeolocation/angular';
+import { useGeolocation } from 'tri-hooks/hooks/device-connectivity/useGeolocation/angular';
 
 @Component({
   selector: 'app-my-component',
   template: `
     <div>
-      <div *ngIf="!isSupported">Geolocation is not supported in your browser</div>
+      <div *ngIf="!isSupported">
+        Geolocation is not supported in your browser
+      </div>
       <div *ngIf="error">Error: {{ error.message }}</div>
       <div *ngIf="isSupported && !error">
         <div *ngIf="position; else gettingLocation">
@@ -131,7 +126,7 @@ import { useGeolocation } from '@myhooks/useGeolocation/angular';
         <button (click)="clearWatch()">Stop Watching</button>
       </div>
     </div>
-  `
+  `,
 })
 export class MyComponent {
   private hook = useGeolocation({ enableHighAccuracy: true });
@@ -165,6 +160,7 @@ export class MyComponent {
 ## Browser Compatibility
 
 This hook uses the Geolocation API which is supported in all modern browsers:
+
 - Chrome 5+
 - Firefox 3.5+
 - Safari 5+

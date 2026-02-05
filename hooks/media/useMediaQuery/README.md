@@ -14,13 +14,8 @@ A React, Vue, and Angular hook/composable/service for using CSS media queries.
 
 ```bash
 # React
-npm install @myhooks/useMediaQuery/react
+npm install tri-hooks
 
-# Vue
-npm install @myhooks/useMediaQuery/vue
-
-# Angular
-npm install @myhooks/useMediaQuery/angular
 ```
 
 ## Usage
@@ -29,7 +24,7 @@ npm install @myhooks/useMediaQuery/angular
 
 ```tsx
 import React from 'react';
-import { useMediaQuery } from '@myhooks/useMediaQuery/react';
+import { useMediaQuery } from 'tri-hooks/hooks/media/useMediaQuery/react';
 
 const MyComponent = () => {
   const isMobile = useMediaQuery('(max-width: 768px)');
@@ -41,7 +36,7 @@ const MyComponent = () => {
       <p>Is mobile: {isMobile ? 'Yes' : 'No'}</p>
       <p>Is dark mode: {isDarkMode ? 'Yes' : 'No'}</p>
       <p>Is high contrast: {isHighContrast ? 'Yes' : 'No'}</p>
-      
+
       {isMobile && <div>Mobile layout content</div>}
       {!isMobile && <div>Desktop layout content</div>}
     </div>
@@ -59,14 +54,14 @@ export default MyComponent;
     <p>Is mobile: {{ isMobile ? 'Yes' : 'No' }}</p>
     <p>Is dark mode: {{ isDarkMode ? 'Yes' : 'No' }}</p>
     <p>Is high contrast: {{ isHighContrast ? 'Yes' : 'No' }}</p>
-    
+
     <div v-if="isMobile">Mobile layout content</div>
     <div v-else>Desktop layout content</div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useMediaQuery } from '@myhooks/useMediaQuery/vue';
+import { useMediaQuery } from 'tri-hooks/hooks/media/useMediaQuery/vue';
 
 const isMobile = useMediaQuery('(max-width: 768px)');
 const isDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -78,7 +73,7 @@ const isHighContrast = useMediaQuery('(prefers-contrast: high)');
 
 ```typescript
 import { Component } from '@angular/core';
-import { useMediaQuery } from '@myhooks/useMediaQuery/angular';
+import { useMediaQuery } from 'tri-hooks/hooks/media/useMediaQuery/angular';
 
 @Component({
   selector: 'app-my-component',
@@ -87,11 +82,11 @@ import { useMediaQuery } from '@myhooks/useMediaQuery/angular';
       <p>Is mobile: {{ isMobile ? 'Yes' : 'No' }}</p>
       <p>Is dark mode: {{ isDarkMode ? 'Yes' : 'No' }}</p>
       <p>Is high contrast: {{ isHighContrast ? 'Yes' : 'No' }}</p>
-      
+
       <div *ngIf="isMobile">Mobile layout content</div>
       <div *ngIf="!isMobile">Desktop layout content</div>
     </div>
-  `
+  `,
 })
 export class MyComponent {
   isMobile = useMediaQuery('(max-width: 768px)');
@@ -123,6 +118,7 @@ export class MyComponent {
 ## Browser Compatibility
 
 This hook uses the Window.matchMedia API which is supported in all modern browsers:
+
 - Chrome 9+
 - Firefox 6+
 - Safari 5.1+

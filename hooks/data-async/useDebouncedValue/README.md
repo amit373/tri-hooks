@@ -43,7 +43,7 @@ const debouncedValue = useDebouncedValue<T>(value: Signal<T> | (() => T), delay?
 ### React
 
 ```tsx
-import { useDebouncedValue } from '@tri-hooks/library/hooks/data-async/useDebouncedValue/react';
+import { useDebouncedValue } from 'tri-hooks/hooks/data-async/useDebouncedValue/react';
 
 function Search() {
   const [query, setQuery] = useState('');
@@ -59,7 +59,7 @@ function Search() {
 
 ```vue
 <script setup>
-import { useDebouncedValue } from '@tri-hooks/library/hooks/data-async/useDebouncedValue/vue';
+import { useDebouncedValue } from 'tri-hooks/hooks/data-async/useDebouncedValue/vue';
 import { ref, watch } from 'vue';
 
 const query = ref('');
@@ -71,7 +71,7 @@ watch(debouncedQuery, (q) => { if (q) fetchResults(q); });
 ### Angular
 
 ```typescript
-import { useDebouncedValue } from '@tri-hooks/library/hooks/data-async/useDebouncedValue/angular';
+import { useDebouncedValue } from 'tri-hooks/hooks/data-async/useDebouncedValue/angular';
 
 @Component({ ... })
 export class SearchComponent {

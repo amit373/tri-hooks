@@ -53,7 +53,7 @@ const { value, increment, decrement, reset, setValue } = useCounter(initialValue
 ### React
 
 ```tsx
-import { useCounter } from './hooks/state-ui/useCounter/react';
+import { useCounter } from 'tri-hooks/hooks/state-ui/useCounter/react';
 
 function ProductQuantity() {
   const [quantity, { increment, decrement, reset }] = useCounter(1, 1);
@@ -75,7 +75,7 @@ function ProductQuantity() {
 
 ```vue
 <script setup>
-import { useCounter } from './hooks/state-ui/useCounter/vue';
+import { useCounter } from 'tri-hooks/hooks/state-ui/useCounter/vue';
 
 const { value: score, increment, reset } = useCounter(0, 10);
 </script>
@@ -93,7 +93,7 @@ const { value: score, increment, reset } = useCounter(0, 10);
 
 ```typescript
 import { Component } from '@angular/core';
-import { useCounter } from './hooks/state-ui/useCounter/angular';
+import { useCounter } from 'tri-hooks/hooks/state-ui/useCounter/angular';
 
 @Component({
   selector: 'app-pagination',

@@ -15,27 +15,28 @@ A React, Vue, and Angular hook/service that provides a reactive interface to the
 ## Installation
 
 ```bash
-npm install your-hooks-library
+npm install tri-hooks
 ```
 
 ## Usage
 
 ### React
+
 ```tsx
-import { useSessionStorage } from 'your-hooks-library/react';
+import { useSessionStorage } from 'tri-hooks/react';
 
 function MyComponent() {
   const {
     value: userPreferences,
     set: setUserPreferences,
     remove: removeUserPreferences,
-    update: updateUserPreferences
+    update: updateUserPreferences,
   } = useSessionStorage('user-prefs', { theme: 'light', language: 'en' });
 
   const toggleTheme = () => {
     updateUserPreferences(prev => ({
       ...prev,
-      theme: prev.theme === 'light' ? 'dark' : 'light'
+      theme: prev.theme === 'light' ? 'dark' : 'light',
     }));
   };
 
@@ -50,21 +51,22 @@ function MyComponent() {
 ```
 
 ### Vue 3
+
 ```vue
 <script setup>
-import { useSessionStorage } from 'your-hooks-library/vue';
+import { useSessionStorage } from 'tri-hooks/vue';
 
 const {
   value: userPreferences,
   set: setUserPreferences,
   remove: removeUserPreferences,
-  update: updateUserPreferences
+  update: updateUserPreferences,
 } = useSessionStorage('user-prefs', { theme: 'light', language: 'en' });
 
 const toggleTheme = () => {
   updateUserPreferences(prev => ({
     ...prev,
-    theme: prev.theme === 'light' ? 'dark' : 'light'
+    theme: prev.theme === 'light' ? 'dark' : 'light',
   }));
 };
 </script>
@@ -79,9 +81,10 @@ const toggleTheme = () => {
 ```
 
 ### Angular
+
 ```typescript
 import { Component } from '@angular/core';
-import { SessionStorageService } from 'your-hooks-library/angular';
+import { SessionStorageService } from 'tri-hooks/angular';
 
 @Component({
   template: `
@@ -90,26 +93,26 @@ import { SessionStorageService } from 'your-hooks-library/angular';
       <button (click)="toggleTheme()">Toggle Theme</button>
       <button (click)="removeUserPreferences()">Reset Preferences</button>
     </div>
-  `
+  `,
 })
 export class MyComponent {
   private sessionStorageService = new SessionStorageService();
-  
+
   private storageState = this.sessionStorageService.useSessionStorage(
-    'user-prefs', 
+    'user-prefs',
     { theme: 'light', language: 'en' }
   );
-  
+
   userPreferences = this.storageState.value;
-  
+
   setUserPreferences = this.storageState.set;
   removeUserPreferences = this.storageState.remove;
   updateUserPreferences = this.storageState.update;
-  
+
   toggleTheme() {
     this.updateUserPreferences(prev => ({
       ...prev,
-      theme: prev.theme === 'light' ? 'dark' : 'light'
+      theme: prev.theme === 'light' ? 'dark' : 'light',
     }));
   }
 }

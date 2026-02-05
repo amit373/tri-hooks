@@ -53,7 +53,7 @@ const { width, height, entry, observe, unobserve } = useResizeObserver(options?)
 
 ```tsx
 import { useRef, useEffect } from 'react';
-import { useResizeObserver } from './hooks/dom-events/useResizeObserver/react';
+import { useResizeObserver } from 'tri-hooks/hooks/dom-events/useResizeObserver/react';
 
 function ResponsiveContainer() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -90,7 +90,7 @@ function ResponsiveContainer() {
 ```vue
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
-import { useResizeObserver } from './hooks/dom-events/useResizeObserver/vue';
+import { useResizeObserver } from 'tri-hooks/hooks/dom-events/useResizeObserver/vue';
 
 const containerRef = ref(null);
 
@@ -128,7 +128,7 @@ import {
   OnInit,
   OnDestroy,
 } from '@angular/core';
-import { useResizeObserver } from './hooks/dom-events/useResizeObserver/angular';
+import { useResizeObserver } from 'tri-hooks/hooks/dom-events/useResizeObserver/angular';
 
 @Component({
   selector: 'app-responsive-container',

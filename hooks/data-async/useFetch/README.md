@@ -56,7 +56,7 @@ const { data, loading, error, refetch, abort } = useFetch(url, options?)
 ### React
 
 ```tsx
-import { useFetch } from './hooks/data-async/useFetch/react';
+import { useFetch } from 'tri-hooks/hooks/data-async/useFetch/react';
 
 function UserProfile({ userId }: { userId: string }) {
   const {
@@ -94,7 +94,7 @@ function UserProfile({ userId }: { userId: string }) {
 
 ```vue
 <script setup>
-import { useFetch } from './hooks/data-async/useFetch/vue';
+import { useFetch } from 'tri-hooks/hooks/data-async/useFetch/vue';
 
 const props = defineProps(['userId']);
 
@@ -132,7 +132,7 @@ const {
 
 ```typescript
 import { Component, Input } from '@angular/core';
-import { useFetch } from './hooks/data-async/useFetch/angular';
+import { useFetch } from 'tri-hooks/hooks/data-async/useFetch/angular';
 
 @Component({
   selector: 'app-user-profile',

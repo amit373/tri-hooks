@@ -1,37 +1,40 @@
 # useFullscreen
 
-React hook for controlling fullscreen mode. Provides an easy way to enter, exit, and toggle fullscreen mode for elements in the browser.
+A React, Vue, and Angular hook/composable/service for controlling fullscreen mode. Enter, exit, and toggle fullscreen for any element with a consistent API and browser support detection.
 
 ## Features
 
-- Enter fullscreen mode for any element
-- Exit fullscreen mode
-- Toggle fullscreen mode
-- Track fullscreen state
-- Cross-browser compatibility
+- Enter fullscreen mode for any element (or document)
+- Exit fullscreen and toggle fullscreen
+- Track fullscreen state reactively
+- Browser support detection (`isEnabled`)
+- Cross-browser compatibility (including webkit prefixes)
 - SSR-safe implementation
+- Identical API across React, Vue, and Angular
 
 ## Installation
 
 ```bash
-npm install # or your package manager of choice
+npm install tri-hooks
 ```
 
 ## Usage
 
-```typescript
-import { useFullscreen } from './hooks/browser-apis/useFullscreen';
+### React
+
+```tsx
+import { useRef } from 'react';
+import { useFullscreen } from 'tri-hooks/hooks/browser-apis/useFullscreen/react';
 
 const VideoPlayer = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
   const {
     isFullscreen,
     enterFullscreen,
     exitFullscreen,
     toggleFullscreen,
-    isEnabled
+    isEnabled,
   } = useFullscreen();
-
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   if (!isEnabled) {
     return <div>Fullscreen is not supported in your browser</div>;
@@ -46,33 +49,105 @@ const VideoPlayer = () => {
       >
         <source src="sample-video.mp4" type="video/mp4" />
       </video>
-
       <div style={{ marginTop: '10px' }}>
         <button onClick={() => toggleFullscreen(videoRef.current)}>
           {isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
         </button>
-
         <button
           onClick={() => enterFullscreen(videoRef.current)}
           disabled={isFullscreen}
-          style={{ marginLeft: '10px' }}
         >
           Enter Fullscreen
         </button>
-
-        <button
-          onClick={exitFullscreen}
-          disabled={!isFullscreen}
-          style={{ marginLeft: '10px' }}
-        >
+        <button onClick={exitFullscreen} disabled={!isFullscreen}>
           Exit Fullscreen
         </button>
       </div>
-
       {isFullscreen && <p>Currently in fullscreen mode</p>}
     </div>
   );
 };
+```
+
+### Vue
+
+```vue
+<template>
+  <div>
+    <div v-if="!isEnabled">Fullscreen is not supported in your browser</div>
+    <template v-else>
+      <video ref="videoRef" controls style="width: 100%; max-width: 800px">
+        <source src="sample-video.mp4" type="video/mp4" />
+      </video>
+      <div style="margin-top: 10px">
+        <button @click="toggleFullscreen(videoRef)">
+          {{ isFullscreen ? 'Exit' : 'Enter' }} Fullscreen
+        </button>
+        <button @click="enterFullscreen(videoRef)" :disabled="isFullscreen">
+          Enter Fullscreen
+        </button>
+        <button @click="exitFullscreen()" :disabled="!isFullscreen">
+          Exit Fullscreen
+        </button>
+      </div>
+      <p v-if="isFullscreen">Currently in fullscreen mode</p>
+    </template>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+import { useFullscreen } from 'tri-hooks/hooks/browser-apis/useFullscreen/vue';
+
+const videoRef = ref<HTMLVideoElement | null>(null);
+const {
+  isFullscreen,
+  enterFullscreen,
+  exitFullscreen,
+  toggleFullscreen,
+  isEnabled,
+} = useFullscreen();
+</script>
+```
+
+### Angular
+
+```typescript
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { useFullscreen } from 'tri-hooks/hooks/browser-apis/useFullscreen/angular';
+
+@Component({
+  selector: 'app-video-player',
+  template: `
+    <div *ngIf="!fs.isEnabled()">
+      Fullscreen is not supported in your browser
+    </div>
+    <template *ngIf="fs.isEnabled()">
+      <video #videoRef controls style="width: 100%; max-width: 800px">
+        <source src="sample-video.mp4" type="video/mp4" />
+      </video>
+      <div style="margin-top: 10px">
+        <button (click)="fs.toggleFullscreen(videoRef?.nativeElement)">
+          {{ fs.isFullscreen() ? 'Exit' : 'Enter' }} Fullscreen
+        </button>
+        <button
+          (click)="fs.enterFullscreen(videoRef?.nativeElement)"
+          [disabled]="fs.isFullscreen()"
+        >
+          Enter Fullscreen
+        </button>
+        <button (click)="fs.exitFullscreen()" [disabled]="!fs.isFullscreen()">
+          Exit Fullscreen
+        </button>
+      </div>
+      <p *ngIf="fs.isFullscreen()">Currently in fullscreen mode</p>
+    </template>
+  `,
+})
+export class VideoPlayerComponent {
+  @ViewChild('videoRef') videoRef!: ElementRef<HTMLVideoElement>;
+  fs = useFullscreen();
+}
 ```
 
 ## API

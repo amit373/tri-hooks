@@ -12,14 +12,7 @@ A React, Vue, and Angular hook/composable/service for tracking page visibility s
 ## Installation
 
 ```bash
-# React
-npm install @myhooks/usePageVisibility/react
-
-# Vue
-npm install @myhooks/usePageVisibility/vue
-
-# Angular
-npm install @myhooks/usePageVisibility/angular
+npm install tri-hooks
 ```
 
 ## Usage
@@ -28,7 +21,7 @@ npm install @myhooks/usePageVisibility/angular
 
 ```tsx
 import React from 'react';
-import { usePageVisibility } from '@myhooks/usePageVisibility/react';
+import { usePageVisibility } from 'tri-hooks/hooks/browser-apis/usePageVisibility/react';
 
 const MyComponent = () => {
   const isVisible = usePageVisibility();
@@ -53,7 +46,7 @@ export default MyComponent;
 </template>
 
 <script setup lang="ts">
-import { usePageVisibility } from '@myhooks/usePageVisibility/vue';
+import { usePageVisibility } from 'tri-hooks/hooks/browser-apis/usePageVisibility/vue';
 
 const isVisible = usePageVisibility();
 </script>
@@ -63,7 +56,7 @@ const isVisible = usePageVisibility();
 
 ```typescript
 import { Component } from '@angular/core';
-import { usePageVisibility } from '@myhooks/usePageVisibility/angular';
+import { usePageVisibility } from 'tri-hooks/hooks/browser-apis/usePageVisibility/angular';
 
 @Component({
   selector: 'app-my-component',
@@ -71,7 +64,7 @@ import { usePageVisibility } from '@myhooks/usePageVisibility/angular';
     <div>
       <p>Page is currently {{ isVisible ? 'visible' : 'hidden' }}</p>
     </div>
-  `
+  `,
 })
 export class MyComponent {
   isVisible = usePageVisibility();
@@ -87,6 +80,7 @@ export class MyComponent {
 ## Browser Compatibility
 
 This hook uses the Page Visibility API which is supported in all modern browsers:
+
 - Chrome 33+
 - Firefox 18+
 - Safari 7+

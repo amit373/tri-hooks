@@ -52,7 +52,7 @@ const { value, setValue, removeValue, error } = useLocalStorage(key, initialValu
 ### React
 
 ```tsx
-import { useLocalStorage } from './hooks/storage/useLocalStorage/react';
+import { useLocalStorage } from 'tri-hooks/hooks/storage/useLocalStorage/react';
 
 function UserPreferences() {
   const {
@@ -101,7 +101,7 @@ function UserPreferences() {
 
 ```vue
 <script setup>
-import { useLocalStorage } from './hooks/storage/useLocalStorage/vue';
+import { useLocalStorage } from 'tri-hooks/hooks/storage/useLocalStorage/vue';
 
 const {
   value: theme,
@@ -148,7 +148,7 @@ const { value: notifications, setValue: setNotifications } = useLocalStorage(
 
 ```typescript
 import { Component } from '@angular/core';
-import { useLocalStorage } from './hooks/storage/useLocalStorage/angular';
+import { useLocalStorage } from 'tri-hooks/hooks/storage/useLocalStorage/angular';
 
 @Component({
   selector: 'app-user-preferences',

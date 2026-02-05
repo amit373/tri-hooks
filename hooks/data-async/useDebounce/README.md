@@ -49,7 +49,7 @@ const debouncedFunction = useDebounce(callback, delay?)
 
 ```tsx
 import { useState } from 'react';
-import { useDebounce } from './hooks/data-async/useDebounce/react';
+import { useDebounce } from 'tri-hooks/hooks/data-async/useDebounce/react';
 
 function SearchInput() {
   const [query, setQuery] = useState('');
@@ -98,7 +98,7 @@ function SearchInput() {
 ```vue
 <script setup>
 import { ref } from 'vue';
-import { useDebounce } from './hooks/data-async/useDebounce/vue';
+import { useDebounce } from 'tri-hooks/hooks/data-async/useDebounce/vue';
 
 const query = ref('');
 const results = ref([]);
@@ -138,7 +138,7 @@ const handleChange = event => {
 
 ```typescript
 import { Component, inject } from '@angular/core';
-import { useDebounce } from './hooks/data-async/useDebounce/angular';
+import { useDebounce } from 'tri-hooks/hooks/data-async/useDebounce/angular';
 
 @Component({
   selector: 'app-search-input',

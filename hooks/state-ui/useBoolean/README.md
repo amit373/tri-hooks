@@ -11,14 +11,7 @@ A React, Vue, and Angular hook/composable/service for managing boolean state wit
 ## Installation
 
 ```bash
-# React
-npm install @myhooks/useBoolean/react
-
-# Vue
-npm install @myhooks/useBoolean/vue
-
-# Angular
-npm install @myhooks/useBoolean/angular
+npm install tri-hooks
 ```
 
 ## Usage
@@ -27,7 +20,7 @@ npm install @myhooks/useBoolean/angular
 
 ```tsx
 import React from 'react';
-import { useBoolean } from '@myhooks/useBoolean/react';
+import { useBoolean } from 'tri-hooks/hooks/state-ui/useBoolean/react';
 
 const MyComponent = () => {
   const { value, toggle, setTrue, setFalse, setValue } = useBoolean(false);
@@ -60,7 +53,7 @@ export default MyComponent;
 </template>
 
 <script setup lang="ts">
-import { useBoolean } from '@myhooks/useBoolean/vue';
+import { useBoolean } from 'tri-hooks/hooks/state-ui/useBoolean/vue';
 
 const { value, toggle, setTrue, setFalse, setValue } = useBoolean(false);
 </script>
@@ -70,7 +63,7 @@ const { value, toggle, setTrue, setFalse, setValue } = useBoolean(false);
 
 ```typescript
 import { Component } from '@angular/core';
-import { useBoolean } from '@myhooks/useBoolean/angular';
+import { useBoolean } from 'tri-hooks/hooks/state-ui/useBoolean/angular';
 
 @Component({
   selector: 'app-my-component',
@@ -82,7 +75,7 @@ import { useBoolean } from '@myhooks/useBoolean/angular';
       <button (click)="setFalse()">Set False</button>
       <button (click)="setValue(!value)">Set Opposite</button>
     </div>
-  `
+  `,
 })
 export class MyComponent {
   private hook = useBoolean(false);

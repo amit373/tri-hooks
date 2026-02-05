@@ -44,7 +44,7 @@ const previous = usePrevious<T>(value: Signal<T>): Signal<T | undefined>
 ### React
 
 ```tsx
-import { usePrevious } from '@tri-hooks/library/hooks/state-ui/usePrevious/react';
+import { usePrevious } from 'tri-hooks/hooks/state-ui/usePrevious/react';
 
 function Counter({ count }: { count: number }) {
   const prevCount = usePrevious(count);
@@ -60,7 +60,7 @@ function Counter({ count }: { count: number }) {
 
 ```vue
 <script setup>
-import { usePrevious } from '@tri-hooks/library/hooks/state-ui/usePrevious/vue';
+import { usePrevious } from 'tri-hooks/hooks/state-ui/usePrevious/vue';
 import { ref } from 'vue';
 
 const count = ref(0);
@@ -75,7 +75,7 @@ const prevCount = usePrevious(count);
 ### Angular
 
 ```typescript
-import { usePrevious } from '@tri-hooks/library/hooks/state-ui/usePrevious/angular';
+import { usePrevious } from 'tri-hooks/hooks/state-ui/usePrevious/angular';
 import { signal } from '@angular/core';
 
 @Component({ ... })

@@ -13,14 +13,7 @@ A React, Vue, and Angular hook/composable/service for monitoring battery status.
 ## Installation
 
 ```bash
-# React
-npm install @myhooks/useBattery/react
-
-# Vue
-npm install @myhooks/useBattery/vue
-
-# Angular
-npm install @myhooks/useBattery/angular
+npm install tri-hooks
 ```
 
 ## Usage
@@ -29,7 +22,7 @@ npm install @myhooks/useBattery/angular
 
 ```tsx
 import React from 'react';
-import { useBattery } from '@myhooks/useBattery/react';
+import { useBattery } from 'tri-hooks/hooks/device-connectivity/useBattery/react';
 
 const MyComponent = () => {
   const { isSupported, battery, error } = useBattery();
@@ -64,7 +57,9 @@ export default MyComponent;
 ```vue
 <template>
   <div>
-    <div v-if="!isSupported">Battery Status API is not supported in your browser</div>
+    <div v-if="!isSupported">
+      Battery Status API is not supported in your browser
+    </div>
     <div v-else-if="error">Error: {{ error.message }}</div>
     <div v-else-if="!battery">Detecting battery status...</div>
     <div v-else>
@@ -77,7 +72,7 @@ export default MyComponent;
 </template>
 
 <script setup lang="ts">
-import { useBattery } from '@myhooks/useBattery/vue';
+import { useBattery } from 'tri-hooks/hooks/device-connectivity/useBattery/vue';
 
 const { isSupported, battery, error } = useBattery();
 </script>
@@ -87,13 +82,15 @@ const { isSupported, battery, error } = useBattery();
 
 ```typescript
 import { Component } from '@angular/core';
-import { useBattery } from '@myhooks/useBattery/angular';
+import { useBattery } from 'tri-hooks/hooks/device-connectivity/useBattery/angular';
 
 @Component({
   selector: 'app-my-component',
   template: `
     <div>
-      <div *ngIf="!isSupported">Battery Status API is not supported in your browser</div>
+      <div *ngIf="!isSupported">
+        Battery Status API is not supported in your browser
+      </div>
       <div *ngIf="error">Error: {{ error.message }}</div>
       <div *ngIf="!hook.battery">Detecting battery status...</div>
       <div *ngIf="hook.battery">
@@ -103,7 +100,7 @@ import { useBattery } from '@myhooks/useBattery/angular';
         <p>Discharging Time: {{ hook.battery!.dischargingTime }}s</p>
       </div>
     </div>
-  `
+  `,
 })
 export class MyComponent {
   hook = useBattery();
@@ -125,6 +122,7 @@ export class MyComponent {
 ## Browser Compatibility
 
 This hook uses the Battery Status API which is supported in:
+
 - Chrome 38+
 - Firefox 10+
 - Opera 25+

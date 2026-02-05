@@ -1,4 +1,4 @@
-# @tri-hooks/library
+# tri-hooks
 
 A comprehensive, tree-shakable hooks library for React, Vue, and Angular with identical functionality and TypeScript support. Covers all major browser APIs and common frontend patterns.
 
@@ -17,15 +17,15 @@ A comprehensive, tree-shakable hooks library for React, Vue, and Angular with id
 **One install for everything:**
 
 ```bash
-npm install @tri-hooks/library
+npm install tri-hooks
 ```
 
 There is only one package. After installing, you can **use** hooks in two ways:
 
 | How you use it | What you do |
 |----------------|-------------|
-| **All at once** | Import many hooks from `@tri-hooks/library` (React) or `@tri-hooks/library/vue` or `@tri-hooks/library/angular` |
-| **Single hook (separately)** | Import one hook from its path, e.g. `@tri-hooks/library/hooks/state-ui/useToggle/react` — your bundle stays small (tree-shaking) |
+| **All at once** | Import many hooks from `tri-hooks` (React) or `tri-hooks/vue` or `tri-hooks/angular` |
+| **Single hook (separately)** | Import one hook from its path, e.g. `tri-hooks/hooks/state-ui/useToggle/react` — your bundle stays small (tree-shaking) |
 
 ### Use all hooks at once (single import)
 
@@ -33,9 +33,9 @@ Import multiple hooks from the main package or from a framework-specific entry. 
 
 | Framework | Import from | Example |
 |-----------|-------------|---------|
-| React | `@tri-hooks/library` or `@tri-hooks/library/react` | `import { useToggle, useClipboard } from '@tri-hooks/library'` |
-| Vue | `@tri-hooks/library/vue` | `import { useToggle, useClipboard } from '@tri-hooks/library/vue'` |
-| Angular | `@tri-hooks/library/angular` | `import { useToggle, useClipboard } from '@tri-hooks/library/angular'` |
+| React | `tri-hooks` or `tri-hooks/react` | `import { useToggle, useClipboard } from 'tri-hooks'` |
+| Vue | `tri-hooks/vue` | `import { useToggle, useClipboard } from 'tri-hooks/vue'` |
+| Angular | `tri-hooks/angular` | `import { useToggle, useClipboard } from 'tri-hooks/angular'` |
 
 ### Use hooks separately (tree-shaking, smaller bundles)
 
@@ -43,19 +43,19 @@ Import only the hook you need from its path. Bundlers will include just that hoo
 
 ```ts
 // React
-import { useToggle } from '@tri-hooks/library/hooks/state-ui/useToggle/react';
+import { useToggle } from 'tri-hooks/hooks/state-ui/useToggle/react';
 
 // Vue
-import { useToggle } from '@tri-hooks/library/hooks/state-ui/useToggle/vue';
+import { useToggle } from 'tri-hooks/hooks/state-ui/useToggle/vue';
 
 // Angular
-import { useToggle } from '@tri-hooks/library/hooks/state-ui/useToggle/angular';
+import { useToggle } from 'tri-hooks/hooks/state-ui/useToggle/angular';
 ```
 
 | Use case | Recommendation |
 |----------|-----------------|
-| Use many hooks | Import from `@tri-hooks/library` (React) or `@tri-hooks/library/vue` or `@tri-hooks/library/angular` |
-| Use one or two hooks, want smallest bundle | Import from the hook path, e.g. `@tri-hooks/library/hooks/state-ui/useToggle/react` |
+| Use many hooks | Import from `tri-hooks` (React) or `tri-hooks/vue` or `tri-hooks/angular` |
+| Use one or two hooks, want smallest bundle | Import from the hook path, e.g. `tri-hooks/hooks/state-ui/useToggle/react` |
 
 ## 🎯 Categories
 
@@ -130,8 +130,8 @@ import { useToggle } from '@tri-hooks/library/hooks/state-ui/useToggle/angular';
 **All at once:**
 
 ```typescript
-import { useToggle, useClipboard } from '@tri-hooks/library';
-// or: import { useToggle, useClipboard } from '@tri-hooks/library/react';
+import { useToggle, useClipboard } from 'tri-hooks';
+// or: import { useToggle, useClipboard } from 'tri-hooks/react';
 
 function MyComponent() {
   const [value, toggle] = useToggle(false);
@@ -145,7 +145,7 @@ function MyComponent() {
 **Separately (tree-shaken):**
 
 ```typescript
-import { useToggle } from '@tri-hooks/library/hooks/state-ui/useToggle/react';
+import { useToggle } from 'tri-hooks/hooks/state-ui/useToggle/react';
 
 function MyComponent() {
   const [value, toggle] = useToggle(false);
@@ -158,7 +158,7 @@ function MyComponent() {
 **All at once:**
 
 ```typescript
-import { useToggle, useClipboard } from '@tri-hooks/library/vue';
+import { useToggle, useClipboard } from 'tri-hooks/vue';
 
 export default {
   setup() {
@@ -172,7 +172,7 @@ export default {
 **Separately (tree-shaken):**
 
 ```typescript
-import { useToggle } from '@tri-hooks/library/hooks/state-ui/useToggle/vue';
+import { useToggle } from 'tri-hooks/hooks/state-ui/useToggle/vue';
 
 export default {
   setup() {
@@ -188,7 +188,7 @@ export default {
 
 ```typescript
 import { Component } from '@angular/core';
-import { useToggle, useClipboard } from '@tri-hooks/library/angular';
+import { useToggle, useClipboard } from 'tri-hooks/angular';
 
 @Component({
   selector: 'app-my-component',
@@ -207,7 +207,7 @@ export class MyComponent {
 
 ```typescript
 import { Component } from '@angular/core';
-import { useToggle } from '@tri-hooks/library/hooks/state-ui/useToggle/angular';
+import { useToggle } from 'tri-hooks/hooks/state-ui/useToggle/angular';
 
 @Component({
   selector: 'app-my-component',

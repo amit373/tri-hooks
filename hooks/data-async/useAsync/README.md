@@ -13,14 +13,7 @@ A React, Vue, and Angular hook/composable/service for handling asynchronous oper
 ## Installation
 
 ```bash
-# React
-npm install @myhooks/useAsync/react
-
-# Vue
-npm install @myhooks/useAsync/vue
-
-# Angular
-npm install @myhooks/useAsync/angular
+npm install tri-hooks
 ```
 
 ## Usage
@@ -29,10 +22,13 @@ npm install @myhooks/useAsync/angular
 
 ```tsx
 import React from 'react';
-import { useAsync } from '@myhooks/useAsync/react';
+import { useAsync } from 'tri-hooks/hooks/data-async/useAsync/react';
 
 const MyComponent = () => {
-  const { data, loading, error, run, reset } = useAsync(() => fetch('/api/data').then(res => res.json()), []);
+  const { data, loading, error, run, reset } = useAsync(
+    () => fetch('/api/data').then(res => res.json()),
+    []
+  );
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -62,7 +58,9 @@ export default MyComponent;
     <div v-else>
       <h1>Data:</h1>
       <pre>{{ JSON.stringify(data, null, 2) }}</pre>
-      <button @click="run(fetch('/api/data').then(res => res.json()))">Refresh</button>
+      <button @click="run(fetch('/api/data').then(res => res.json()))">
+        Refresh
+      </button>
       <button @click="reset">Reset</button>
     </div>
   </div>
@@ -70,9 +68,11 @@ export default MyComponent;
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { useAsync } from '@myhooks/useAsync/vue';
+import { useAsync } from 'tri-hooks/hooks/data-async/useAsync/vue';
 
-const { data, loading, error, run, reset } = useAsync(() => fetch('/api/data').then(res => res.json()));
+const { data, loading, error, run, reset } = useAsync(() =>
+  fetch('/api/data').then(res => res.json())
+);
 </script>
 ```
 
@@ -80,7 +80,7 @@ const { data, loading, error, run, reset } = useAsync(() => fetch('/api/data').t
 
 ```typescript
 import { Component, OnInit } from '@angular/core';
-import { useAsync } from '@myhooks/useAsync/angular';
+import { useAsync } from 'tri-hooks/hooks/data-async/useAsync/angular';
 
 @Component({
   selector: 'app-my-component',
@@ -90,10 +90,12 @@ import { useAsync } from '@myhooks/useAsync/angular';
     <div *ngIf="!loading && !error">
       <h1>Data:</h1>
       <pre>{{ data | json }}</pre>
-      <button (click)="run(fetch('/api/data').then(res => res.json()))">Refresh</button>
+      <button (click)="run(fetch('/api/data').then(res => res.json()))">
+        Refresh
+      </button>
       <button (click)="reset()">Reset</button>
     </div>
-  `
+  `,
 })
 export class MyComponent implements OnInit {
   private hook = useAsync(() => fetch('/api/data').then(res => res.json()), []);

@@ -14,29 +14,33 @@ A powerful spring-physics based animation hook that creates smooth, natural moti
 ## Installation
 
 ```bash
-npm install your-hooks-library
+npm install tri-hooks
 ```
 
 ## Usage
 
 ### React
+
 ```tsx
-import { useSpring } from 'your-hooks-library/react';
+import { useSpring } from 'tri-hooks/react';
 
 function MyComponent() {
-  const [animatedValues, setTarget] = useSpring({ x: 0, y: 0 }, { 
-    tension: 170, 
-    friction: 26 
-  });
+  const [animatedValues, setTarget] = useSpring(
+    { x: 0, y: 0 },
+    {
+      tension: 170,
+      friction: 26,
+    }
+  );
 
   const handleClick = () => {
     setTarget({ x: 100, y: 50 });
   };
 
   return (
-    <div 
-      style={{ 
-        transform: `translate(${animatedValues.x}px, ${animatedValues.y}px)` 
+    <div
+      style={{
+        transform: `translate(${animatedValues.x}px, ${animatedValues.y}px)`,
       }}
       onClick={handleClick}
     >
@@ -47,14 +51,18 @@ function MyComponent() {
 ```
 
 ### Vue 3
+
 ```vue
 <script setup>
-import { useSpring } from 'your-hooks-library/vue';
+import { useSpring } from 'tri-hooks/vue';
 
-const [animatedValues, setTarget] = useSpring({ scale: 1 }, { 
-  tension: 170, 
-  friction: 26 
-});
+const [animatedValues, setTarget] = useSpring(
+  { scale: 1 },
+  {
+    tension: 170,
+    friction: 26,
+  }
+);
 
 const handleClick = () => {
   setTarget({ scale: 1.5 });
@@ -62,7 +70,7 @@ const handleClick = () => {
 </script>
 
 <template>
-  <div 
+  <div
     :style="{ transform: `scale(${animatedValues.scale})` }"
     @click="handleClick"
   >
@@ -72,13 +80,14 @@ const handleClick = () => {
 ```
 
 ### Angular
+
 ```typescript
 import { Component, effect } from '@angular/core';
-import { useSpring } from 'your-hooks-library/angular';
+import { useSpring } from 'tri-hooks/angular';
 
 @Component({
   template: `
-    <div 
+    <div
       [style.transform]="'scale(' + animatedValues().scale + ')'"
       (click)="handleClick()"
     >
@@ -87,9 +96,9 @@ import { useSpring } from 'your-hooks-library/angular';
   `
 })
 export class MyComponent {
-  [animatedValues, setTarget] = useSpring({ scale: 1 }, { 
-    tension: 170, 
-    friction: 26 
+  [animatedValues, setTarget] = useSpring({ scale: 1 }, {
+    tension: 170,
+    friction: 26
   });
 
   constructor() {
@@ -111,7 +120,7 @@ export class MyComponent {
 - `initialValues` (Record<string, number>): Initial values for the animated properties
 - `config` (Object, optional): Configuration object with:
   - `tension` (number, default: 170): Spring tension parameter
-  - `friction` (number, default: 26): Spring friction parameter  
+  - `friction` (number, default: 26): Spring friction parameter
   - `precision` (number, default: 0.01): Animation precision threshold
 
 ### Return Value

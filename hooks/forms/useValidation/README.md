@@ -1,180 +1,198 @@
 # useValidation
 
-React hook for form field validation. Provides an easy way to validate form inputs with custom validation rules and track validation state.
+A React, Vue, and Angular hook/composable/service for form-level validation. Define initial values and validation rules per field; get reactive values, errors, and helpers like `handleChange`, `validate`, and `reset`.
 
 ## Features
 
-- Custom validation rules
-- Real-time validation feedback
-- Error message handling
-- Form state management
-- Validation reset capability
-- Type-safe validation
+- Form-level validation with multiple fields
+- Custom validation rules per field (return `string` error or `undefined` if valid)
+- Reactive values and errors; clear errors on change
+- `handleChange(name, value)` and `validate()` / `reset()`
+- TypeScript-friendly with generic form shape
+- Identical API across React, Vue, and Angular
 
 ## Installation
 
 ```bash
-npm install # or your package manager of choice
+npm install tri-hooks
 ```
 
 ## Usage
 
-```typescript
-import { useValidation } from './hooks/forms/useValidation';
+### React
 
-const EmailInput = () => {
-  const emailValidation = useValidation('', {
-    required: (value) => value.trim() !== '' || 'Email is required',
-    emailFormat: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || 'Invalid email format',
-    minLength: (value) => value.length >= 5 || 'Email must be at least 5 characters'
-  });
+```tsx
+import { useValidation } from 'tri-hooks/hooks/forms/useValidation/react';
 
-  return (
-    <div>
-      <input
-        type="email"
-        value={emailValidation.value}
-        onChange={(e) => emailValidation.setValue(e.target.value)}
-        onBlur={emailValidation.validate}
-        style={{ borderColor: emailValidation.isValid ? 'green' : 'red' }}
-      />
+const LoginForm = () => {
+  const { values, errors, isValid, handleChange, validate, reset } =
+    useValidation(
+      { email: '', password: '' },
+      {
+        email: v => (v.trim() ? undefined : 'Email is required'),
+        password: v =>
+          v.length >= 8 ? undefined : 'Password must be at least 8 characters',
+      }
+    );
 
-      {!emailValidation.isValid && (
-        <div style={{ color: 'red' }}>
-          {Object.values(emailValidation.errors).map((error, i) => (
-            <p key={i}>{error}</p>
-          ))}
-        </div>
-      )}
-
-      <button
-        onClick={emailValidation.validate}
-        disabled={emailValidation.isValid}
-      >
-        Validate
-      </button>
-
-      <button onClick={emailValidation.reset}>
-        Reset
-      </button>
-    </div>
-  );
-};
-
-// Advanced usage with complex validation
-const RegistrationForm = () => {
-  const username = useValidation('', {
-    required: (val) => val.trim() !== '',
-    minLength: (val) => val.length >= 3 || 'Username must be at least 3 characters',
-    noSpecialChars: (val) => /^[a-zA-Z0-9_]*$/.test(val) || 'Only letters, numbers, and underscores allowed'
-  });
-
-  const password = useValidation('', {
-    required: (val) => val !== '',
-    minLength: (val) => val.length >= 8 || 'Password must be at least 8 characters',
-    hasNumber: (val) => /\d/.test(val) || 'Password must contain at least one number',
-    hasUpper: (val) => /[A-Z]/.test(val) || 'Password must contain at least one uppercase letter'
-  });
-
-  const confirmPassword = useValidation('', {
-    matchesPassword: (val) => val === password.value || 'Passwords do not match'
-  });
-
-  const handleSubmit = () => {
-    const isUsernameValid = username.validate();
-    const isPasswordValid = password.validate();
-    const isConfirmValid = confirmPassword.validate();
-
-    if (isUsernameValid && isPasswordValid && isConfirmValid) {
-      // Submit form
-      console.log('Form is valid!', {
-        username: username.value,
-        password: password.value
-      });
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (validate().isValid) {
+      console.log('Submit', values);
     }
   };
 
   return (
-    <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
-      <div>
-        <input
-          placeholder="Username"
-          value={username.value}
-          onChange={(e) => username.setValue(e.target.value)}
-          onBlur={username.validate}
-        />
-        {username.errors.required && <span>Username is required</span>}
-        {username.errors.minLength && <span>{username.errors.minLength}</span>}
-        {username.errors.noSpecialChars && <span>{username.errors.noSpecialChars}</span>}
-      </div>
-
-      <div>
-        <input
-          type="password"
-          placeholder="Password"
-          value={password.value}
-          onChange={(e) => password.setValue(e.target.value)}
-          onBlur={password.validate}
-        />
-        {password.errors.required && <span>Password is required</span>}
-        {password.errors.minLength && <span>{password.errors.minLength}</span>}
-        {password.errors.hasNumber && <span>{password.errors.hasNumber}</span>}
-        {password.errors.hasUpper && <span>{password.errors.hasUpper}</span>}
-      </div>
-
-      <div>
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          value={confirmPassword.value}
-          onChange={(e) => confirmPassword.setValue(e.target.value)}
-          onBlur={confirmPassword.validate}
-        />
-        {confirmPassword.errors.matchesPassword && <span>{confirmPassword.errors.matchesPassword}</span>}
-      </div>
-
-      <button type="submit">Register</button>
+    <form onSubmit={onSubmit}>
+      <input
+        value={values.email}
+        onChange={e => handleChange('email', e.target.value)}
+        placeholder="Email"
+      />
+      {errors.email && <span>{errors.email}</span>}
+      <input
+        type="password"
+        value={values.password}
+        onChange={e => handleChange('password', e.target.value)}
+        placeholder="Password"
+      />
+      {errors.password && <span>{errors.password}</span>}
+      <button type="submit" disabled={!isValid}>
+        Submit
+      </button>
+      <button type="button" onClick={reset}>
+        Reset
+      </button>
     </form>
   );
 };
+```
+
+### Vue
+
+```vue
+<template>
+  <form @submit.prevent="onSubmit">
+    <input
+      v-model="values.email"
+      @input="handleChange('email', ($event.target as HTMLInputElement).value)"
+      placeholder="Email"
+    />
+    <span v-if="errors.email">{{ errors.email }}</span>
+    <input
+      type="password"
+      v-model="values.password"
+      @input="
+        handleChange('password', ($event.target as HTMLInputElement).value)
+      "
+      placeholder="Password"
+    />
+    <span v-if="errors.password">{{ errors.password }}</span>
+    <button type="submit" :disabled="!isValid">Submit</button>
+    <button type="button" @click="reset">Reset</button>
+  </form>
+</template>
+
+<script setup lang="ts">
+import { useValidation } from 'tri-hooks/hooks/forms/useValidation/vue';
+
+const { values, errors, isValid, handleChange, validate, reset } =
+  useValidation(
+    { email: '', password: '' },
+    {
+      email: v => (v.trim() ? undefined : 'Email is required'),
+      password: v =>
+        v.length >= 8 ? undefined : 'Password must be at least 8 characters',
+    }
+  );
+
+const onSubmit = () => {
+  if (validate().isValid) {
+    console.log('Submit', values);
+  }
+};
+</script>
+```
+
+### Angular
+
+```typescript
+import { Component } from '@angular/core';
+import { useValidation } from 'tri-hooks/hooks/forms/useValidation/angular';
+
+@Component({
+  selector: 'app-login-form',
+  template: `
+    <form (ngSubmit)="onSubmit()">
+      <input
+        [ngModel]="v.values.email"
+        name="email"
+        (ngModelChange)="v.handleChange('email', $event)"
+        placeholder="Email"
+      />
+      <span *ngIf="v.errors.email">{{ v.errors.email }}</span>
+      <input
+        type="password"
+        [ngModel]="v.values.password"
+        name="password"
+        (ngModelChange)="v.handleChange('password', $event)"
+        placeholder="Password"
+      />
+      <span *ngIf="v.errors.password">{{ v.errors.password }}</span>
+      <button type="submit" [disabled]="!v.isValid">Submit</button>
+      <button type="button" (click)="v.reset()">Reset</button>
+    </form>
+  `,
+})
+export class LoginFormComponent {
+  v = useValidation(
+    { email: '', password: '' },
+    {
+      email: val => (val?.trim() ? undefined : 'Email is required'),
+      password: val =>
+        val && val.length >= 8
+          ? undefined
+          : 'Password must be at least 8 characters',
+    }
+  );
+
+  onSubmit() {
+    if (this.v.validate().isValid) {
+      console.log('Submit', this.v.values);
+    }
+  }
+}
 ```
 
 ## API
 
 ### Arguments
 
-- `initialValue` (any): Initial value for the field
-- `rules` (object): Validation rules to apply
-  - Keys are rule names
-  - Values are validation functions that accept the field value and return either:
-    - `true` if validation passes
-    - `false` if validation fails (uses default error message)
-    - A string error message if validation fails
+- **`initialValues`** (object): Initial field values (e.g. `{ email: '', password: '' }`).
+- **`validationRules`** (object): One validator per field. Keys match `initialValues`. Each value is a function `(value) => string | undefined` — return `undefined` when valid, or an error string when invalid.
 
 ### Return Values
 
-- `value` (any): Current field value
-- `setValue` (function): Function to update the field value
-- `errors` (object): Object containing validation errors by rule name
-- `isValid` (boolean): True if all validations pass
-- `validate` (function): Function to manually trigger validation
-- `reset` (function): Function to reset value and errors to initial state
+- **`values`**: Current form values (React: plain object; Vue: reactive object; Angular: use `values()` signal).
+- **`errors`**: Current errors by field name (React: plain object; Vue: reactive; Angular: use `errors()`).
+- **`isValid`**: `true` when there are no errors.
+- **`handleChange(name, value)`**: Update one field and clear its error.
+- **`validate()`**: Run all validators, update `errors`, and return `{ isValid, errors }`.
+- **`reset()`**: Reset values and errors to `initialValues` and empty errors.
 
 ## Validation Rules
 
-Validation functions should return:
+Each rule is a function that receives the field value and returns:
 
-- `true` if the validation passes
-- `false` if it fails (will show default error message)
-- A string with a custom error message if it fails
+- `undefined` (or no return) when valid
+- A `string` error message when invalid
 
-## Common Validation Patterns
+## Common Patterns
 
-- Required field: `(value) => value.trim() !== '' || 'Field is required'`
-- Email format: `(value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || 'Invalid email'`
-- Minimum length: `(value) => value.length >= 8 || 'Must be at least 8 characters'`
-- Pattern matching: `(value) => /^\d+$/.test(value) || 'Only numbers allowed'`
-- Value comparison: `(value) => value === otherValue || 'Values do not match'`
+- Required: `(v) => (v?.trim() ? undefined : 'Field is required')`
+- Min length: `(v) => (v && v.length >= 8 ? undefined : 'At least 8 characters')`
+- Email: `(v) => (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v || '') ? undefined : 'Invalid email')`
+- Match other: `(v) => (v === otherValue ? undefined : 'Values do not match')`
 
 ## License
 

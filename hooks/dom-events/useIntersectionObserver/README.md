@@ -54,7 +54,7 @@ const { isIntersecting, entry, observe, unobserve } = useIntersectionObserver(op
 
 ```tsx
 import { useRef, useEffect } from 'react';
-import { useIntersectionObserver } from './hooks/dom-events/useIntersectionObserver/react';
+import { useIntersectionObserver } from 'tri-hooks/hooks/dom-events/useIntersectionObserver/react';
 
 function LazyImage({ src, alt }: { src: string; alt: string }) {
   const imgRef = useRef<HTMLImageElement>(null);
@@ -94,7 +94,7 @@ function LazyImage({ src, alt }: { src: string; alt: string }) {
 ```vue
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
-import { useIntersectionObserver } from './hooks/dom-events/useIntersectionObserver/vue';
+import { useIntersectionObserver } from 'tri-hooks/hooks/dom-events/useIntersectionObserver/vue';
 
 const props = defineProps(['src', 'alt']);
 const imgRef = ref(null);
@@ -142,7 +142,7 @@ import {
   OnInit,
   OnDestroy,
 } from '@angular/core';
-import { useIntersectionObserver } from './hooks/dom-events/useIntersectionObserver/angular';
+import { useIntersectionObserver } from 'tri-hooks/hooks/dom-events/useIntersectionObserver/angular';
 
 @Component({
   selector: 'app-lazy-image',
